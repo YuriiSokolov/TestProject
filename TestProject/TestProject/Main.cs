@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -23,6 +18,15 @@ namespace TestProject
 
         private void Main_Load(object sender, EventArgs e)
         {
+            if(User.isAdmin == false)
+            {
+                btnChangeManager.Visible = false;
+            }
+            else
+            {
+                btnChangeManager.Visible = true;
+            }
+
             sqlCon.Open();
             string query = "Select * from Document";
             SqlDataAdapter sdaSelectFromDocument = new SqlDataAdapter(query, sqlCon);
@@ -116,6 +120,18 @@ namespace TestProject
             dataGVFromDocument.DataSource = result;
 
             sqlCon.Close();
+        }
+
+        private void btnCreateForm_Click(object sender, EventArgs e)
+        {
+            ShipmentForm form = new ShipmentForm();
+            form.Show();
+        }
+
+        private void btnChangeManager_Click(object sender, EventArgs e)
+        {
+            AdminPanel form = new AdminPanel();
+            form.Show();
         }
     }
 }

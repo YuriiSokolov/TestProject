@@ -8,3 +8,5 @@ E:\Test Project\TestProject\TestProject\obj\Debug\TestProject.csproj.GenerateRes
 E:\Test Project\TestProject\TestProject\obj\Debug\TestProject.exe
 E:\Test Project\TestProject\TestProject\obj\Debug\TestProject.pdb
 E:\Test Project\TestProject\TestProject\obj\Debug\TestProject.Authorization.resources
+E:\Test Project\TestProject\TestProject\obj\Debug\TestProject.ShipmentForm.resources
+E:\Test Project\TestProject\TestProject\obj\Debug\TestProject.AdminPanel.resources
