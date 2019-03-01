@@ -1,0 +1,12 @@
+E:\Test Project\TestProject\TestProject\bin\Release\TestProject.exe.config
+E:\Test Project\TestProject\TestProject\bin\Release\TestProject.exe
+E:\Test Project\TestProject\TestProject\bin\Release\TestProject.pdb
+E:\Test Project\TestProject\TestProject\obj\Release\TestProject.csprojResolveAssemblyReference.cache
+E:\Test Project\TestProject\TestProject\obj\Release\TestProject.AdminPanel.resources
+E:\Test Project\TestProject\TestProject\obj\Release\TestProject.Authorization.resources
+E:\Test Project\TestProject\TestProject\obj\Release\TestProject.Main.resources
+E:\Test Project\TestProject\TestProject\obj\Release\TestProject.Properties.Resources.resources
+E:\Test Project\TestProject\TestProject\obj\Release\TestProject.ShipmentForm.resources
+E:\Test Project\TestProject\TestProject\obj\Release\TestProject.csproj.GenerateResource.Cache
+E:\Test Project\TestProject\TestProject\obj\Release\TestProject.exe
+E:\Test Project\TestProject\TestProject\obj\Release\TestProject.pdb
