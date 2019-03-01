@@ -1,0 +1,10 @@
+E:\Test Project\TestProject\TestProject\bin\Debug\TestProject.exe.config
+E:\Test Project\TestProject\TestProject\bin\Debug\TestProject.exe
+E:\Test Project\TestProject\TestProject\bin\Debug\TestProject.pdb
+E:\Test Project\TestProject\TestProject\obj\Debug\TestProject.csprojResolveAssemblyReference.cache
+E:\Test Project\TestProject\TestProject\obj\Debug\TestProject.Main.resources
+E:\Test Project\TestProject\TestProject\obj\Debug\TestProject.Properties.Resources.resources
+E:\Test Project\TestProject\TestProject\obj\Debug\TestProject.csproj.GenerateResource.Cache
+E:\Test Project\TestProject\TestProject\obj\Debug\TestProject.exe
+E:\Test Project\TestProject\TestProject\obj\Debug\TestProject.pdb
+E:\Test Project\TestProject\TestProject\obj\Debug\TestProject.Authorization.resources
