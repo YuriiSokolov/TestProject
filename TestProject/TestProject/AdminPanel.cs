@@ -22,37 +22,36 @@ namespace TestProject
 
         private void AdminPanel_Load(object sender, EventArgs e)
         {
-            string query = "Select Login From [Authorization]";
-            DataTable logins = new DataTable();
-            sqlCon.Open();
-
-            SqlDataAdapter sda = new SqlDataAdapter(query, sqlCon);
-            sda.Fill(logins);
-
-            sqlCon.Close();
-
-            comboBoxLogin.DataSource = logins;
-            comboBoxLogin.DisplayMember = "Login";
+            UpdateManagerInfo();
         }
 
         private void btnCreateManager_Click(object sender, EventArgs e)
         {
             if (txtLogin.Text != string.Empty && txtName.Text != string.Empty && txtPass.Text != string.Empty)
             {
-                SqlCommand cmd = sqlCon.CreateCommand();
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = string.Format("INSERT INTO [Authorization] (Name, Login, Password) values('{0}', '{1}', '{2}')",
-                    txtName.Text, txtLogin.Text, Authorization.ComputeSha256Hash(txtPass.Text));
+                if (IsNewLogin(txtLogin.Text) == true)
+                {
+                    SqlCommand cmd = sqlCon.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = string.Format("INSERT INTO [Authorization] (Name, Login, Password) values('{0}', '{1}', '{2}')",
+                        txtName.Text, txtLogin.Text, Authorization.ComputeSha256Hash(txtPass.Text));
 
-                sqlCon.Open();
-                cmd.ExecuteNonQuery();
-                sqlCon.Close();
+                    sqlCon.Open();
+                    cmd.ExecuteNonQuery();
+                    sqlCon.Close();
 
-                txtLogin.Clear();
-                txtPass.Clear();
-                txtName.Clear();
+                    txtLogin.Clear();
+                    txtPass.Clear();
+                    txtName.Clear();
 
-                MessageBox.Show("Новый менеджер добавлен!");
+                    UpdateManagerInfo();
+
+                    MessageBox.Show("Новый менеджер добавлен!");
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка: Пользователь с Логином: " + txtLogin.Text + " уже существует!");
+                }
             }
             else
             {
@@ -64,95 +63,117 @@ namespace TestProject
         {
             string login = comboBoxLogin.Text;
 
-            string query = string.Format("Select * from [Authorization] Where Login = '{0}'", login);
-            DataTable userInfo = new DataTable();
-
-            sqlCon.Open();
-
-            SqlDataAdapter sda = new SqlDataAdapter(query, sqlCon);
-            sda.Fill(userInfo);
-
-            sqlCon.Close();
-
-            SqlCommand sqlCmd = sqlCon.CreateCommand();
-            sqlCmd.CommandType = CommandType.Text;
-      
-            if(Convert.ToInt32(userInfo.Rows[0]["Admin"]) == 0)
+            if (ItsMe(login) == false)
             {
-                sqlCmd.CommandText = string.Format("UPDATE [Authorization] SET Admin=1 WHERE Login='{0}'", login);
-                MessageBox.Show(string.Format("{0} теперь Администратор!", login));
+                string query = string.Format("Select * from [Authorization] Where Login = '{0}'", login);
+                DataTable userInfo = new DataTable();
+
+                sqlCon.Open();
+
+                SqlDataAdapter sda = new SqlDataAdapter(query, sqlCon);
+                sda.Fill(userInfo);
+
+                sqlCon.Close();
+
+                SqlCommand sqlCmd = sqlCon.CreateCommand();
+                sqlCmd.CommandType = CommandType.Text;
+
+                if (Convert.ToInt32(userInfo.Rows[0]["Admin"]) == 0)
+                {
+                    sqlCmd.CommandText = string.Format("UPDATE [Authorization] SET Admin=1 WHERE Login='{0}'", login);
+                    MessageBox.Show(string.Format("{0} теперь Администратор!", login));
+                }
+                else
+                {
+                    sqlCmd.CommandText = string.Format("UPDATE [Authorization] SET Admin=0 WHERE Login='{0}'", login);
+                    MessageBox.Show(string.Format("{0} теперь НЕ Администратор!", login));
+                }
+
+                sqlCon.Open();
+                sqlCmd.ExecuteNonQuery();
+                sqlCon.Close();
             }
             else
             {
-                sqlCmd.CommandText = string.Format("UPDATE [Authorization] SET Admin=0 WHERE Login='{0}'", login);
-                MessageBox.Show(string.Format("{0} теперь НЕ Администратор!", login));
+                MessageBox.Show("Ошибка: Вы не можете изменить информацию о себе!");
             }
-            
-            sqlCon.Open();
-            sqlCmd.ExecuteNonQuery();
-            sqlCon.Close();
         }
 
         private void btnBan_Click(object sender, EventArgs e)
         {
             string login = comboBoxLogin.Text;
 
-            string query = string.Format("Select * from [Authorization] Where Login = '{0}'", login);
-            DataTable userInfo = new DataTable();
-
-            sqlCon.Open();
-
-            SqlDataAdapter sda = new SqlDataAdapter(query, sqlCon);
-            sda.Fill(userInfo);
-
-            sqlCon.Close();
-
-            SqlCommand sqlCmd = sqlCon.CreateCommand();
-            sqlCmd.CommandType = CommandType.Text;
-
-            if (Convert.ToInt32(userInfo.Rows[0]["Ban"]) == 0)
+            if (ItsMe(login) == false)
             {
-                sqlCmd.CommandText = string.Format("UPDATE [Authorization] SET Ban=1 WHERE Login='{0}'", login);
-                MessageBox.Show(string.Format("Вы забанили: {0}!", login));
+                string query = string.Format("Select * from [Authorization] Where Login = '{0}'", login);
+                DataTable userInfo = new DataTable();
+
+                sqlCon.Open();
+
+                SqlDataAdapter sda = new SqlDataAdapter(query, sqlCon);
+                sda.Fill(userInfo);
+
+                sqlCon.Close();
+
+                SqlCommand sqlCmd = sqlCon.CreateCommand();
+                sqlCmd.CommandType = CommandType.Text;
+
+                if (Convert.ToInt32(userInfo.Rows[0]["Ban"]) == 0)
+                {
+                    sqlCmd.CommandText = string.Format("UPDATE [Authorization] SET Ban=1 WHERE Login='{0}'", login);
+                    MessageBox.Show(string.Format("Вы забанили: {0}!", login));
+                }
+                else
+                {
+                    sqlCmd.CommandText = string.Format("UPDATE [Authorization] SET Ban=0 WHERE Login='{0}'", login);
+                    MessageBox.Show(string.Format("Вы розбанили: {0}!", login));
+                }
+
+                sqlCon.Open();
+                sqlCmd.ExecuteNonQuery();
+                sqlCon.Close();
             }
             else
             {
-                sqlCmd.CommandText = string.Format("UPDATE [Authorization] SET Ban=0 WHERE Login='{0}'", login);
-                MessageBox.Show(string.Format("Вы розбанили: {0}!", login));
+                MessageBox.Show("Ошибка: Вы не можете себя забанить!");
             }
-
-            sqlCon.Open();
-            sqlCmd.ExecuteNonQuery();
-            sqlCon.Close();
         }
 
         private void btnChangeLogin_Click(object sender, EventArgs e)
         {
             string login = comboBoxLogin.Text;
 
-            string query = string.Format("Select * from [Authorization] Where Login = '{0}'", login);
-            DataTable userInfo = new DataTable();
-
-            sqlCon.Open();
-
-            SqlDataAdapter sda = new SqlDataAdapter(query, sqlCon);
-            sda.Fill(userInfo);
-
-            sqlCon.Close();
-
-            SqlCommand sqlCmd = sqlCon.CreateCommand();
-            sqlCmd.CommandType = CommandType.Text;
-
-            if (txtNewLogin.Text != string.Empty)
+            if (ItsMe(login) == false)
             {
-                sqlCmd.CommandText = string.Format("UPDATE [Authorization] SET Login='{1}' WHERE Login='{0}'", login, txtNewLogin.Text);
+                string query = string.Format("Select * from [Authorization] Where Login = '{0}'", login);
+                DataTable userInfo = new DataTable();
+
+                sqlCon.Open();
+
+                SqlDataAdapter sda = new SqlDataAdapter(query, sqlCon);
+                sda.Fill(userInfo);
+
+                sqlCon.Close();
+
+                SqlCommand sqlCmd = sqlCon.CreateCommand();
+                sqlCmd.CommandType = CommandType.Text;
+
+                if (txtNewLogin.Text != string.Empty)
+                {
+                    sqlCmd.CommandText = string.Format("UPDATE [Authorization] SET Login='{1}' WHERE Login='{0}'", login, txtNewLogin.Text);
+                }
+
+                sqlCon.Open();
+                sqlCmd.ExecuteNonQuery();
+                sqlCon.Close();
+
+                UpdateManagerInfo();
+                MessageBox.Show(string.Format("Вы изменили Логин: {0} на новый Логин: {1}!", login, txtNewLogin.Text));
             }
-
-            sqlCon.Open();
-            sqlCmd.ExecuteNonQuery();
-            sqlCon.Close();
-
-            MessageBox.Show(string.Format("Вы изменили Логин: {0} на новый Логин: {1}!", login, txtNewLogin.Text));
+            else
+            {
+                MessageBox.Show("Ошибка: Вы не можете изменить информацию о себе!");
+            }
         }
 
         private void btnChangePass_Click(object sender, EventArgs e)
@@ -188,26 +209,86 @@ namespace TestProject
         {
             string login = comboBoxLogin.Text;
 
-            string query = string.Format("Select * from [Authorization] Where Login = '{0}'", login);
-            DataTable userInfo = new DataTable();
+            if (ItsMe(login) == false)
+            {
+                string query = string.Format("Select * from [Authorization] Where Login = '{0}'", login);
+                DataTable userInfo = new DataTable();
 
+                sqlCon.Open();
+
+                SqlDataAdapter sda = new SqlDataAdapter(query, sqlCon);
+                sda.Fill(userInfo);
+
+                sqlCon.Close();
+
+                SqlCommand sqlCmd = sqlCon.CreateCommand();
+                sqlCmd.CommandType = CommandType.Text;
+
+                sqlCmd.CommandText = string.Format("Delete from [Authorization] WHERE Login='{0}'", login);
+
+                sqlCon.Open();
+                sqlCmd.ExecuteNonQuery();
+                sqlCon.Close();
+
+                UpdateManagerInfo();
+                MessageBox.Show(string.Format("Вы удалили менеджера {0}!", login));
+            }
+            else
+            {
+                MessageBox.Show("Ошибка: Вы не можете удалить свой аккаунт!");
+            }
+        }
+
+        public void UpdateManagerInfo()
+        {
+            string query = "Select Login From [Authorization]";
+            DataTable logins = new DataTable();
             sqlCon.Open();
 
             SqlDataAdapter sda = new SqlDataAdapter(query, sqlCon);
-            sda.Fill(userInfo);
+            sda.Fill(logins);
 
             sqlCon.Close();
 
-            SqlCommand sqlCmd = sqlCon.CreateCommand();
-            sqlCmd.CommandType = CommandType.Text;
+            comboBoxLogin.DataSource = logins;
+            comboBoxLogin.DisplayMember = "Login";
+        }
 
-            sqlCmd.CommandText = string.Format("Delete from [Authorization] WHERE Login='{0}'", login);
+        public bool ItsMe(string login)
+        {
+            if(User.login == login)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
+        public bool IsNewLogin(string login)
+        {
+            bool isNewLogin = true;
+
+            string query = "Select Login From [Authorization]";
+            DataTable logins = new DataTable();
             sqlCon.Open();
-            sqlCmd.ExecuteNonQuery();
+
+            SqlDataAdapter sda = new SqlDataAdapter(query, sqlCon);
+            sda.Fill(logins);
+
             sqlCon.Close();
 
-            MessageBox.Show(string.Format("Вы удалили менеджера {0}!", login));
+            for(int i = 0; i < logins.Rows.Count; i++)
+            {
+                if(login == logins.Rows[i]["Login"].ToString())
+                {
+                    isNewLogin = false;
+                    break;
+                }
+            }
+
+            return isNewLogin;
         }
     }
 }

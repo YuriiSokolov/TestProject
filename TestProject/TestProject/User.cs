@@ -10,5 +10,6 @@ namespace TestProject
     {
         static public string name;
         static public bool isAdmin;
+        static public string login;
     }
 }

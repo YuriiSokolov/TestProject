@@ -83,8 +83,8 @@ namespace TestProject
             DateTime date = new DateTime();
             date = DateTime.Now;
 
-            string query = string.Format("Select AVG([Sum]) as 'AVG' From Document Where Manager = '{0}' AND Date = '{1}'",
-                User.name, date.ToShortDateString());
+            string query = string.Format("Select AVG([Sum]) as 'AVG' From Document Where Manager = '{0}' AND Date = '%{1}%{2}'",
+                User.name, date.Month.ToString(), date.Year.ToString());
 
             sqlCon.Open();
             SqlDataAdapter sda = new SqlDataAdapter(query, sqlCon);
@@ -96,13 +96,15 @@ namespace TestProject
                 result = false;
                 thisMonth = false;
             }
-            else if(thisMonth != false)
+            if(thisMonth != false && rows.Rows[0]["AVG"] != null)
             {
                 int avarageSum = Convert.ToInt32(rows.Rows[0]["AVG"]);
 
                 thisMonth = true;
 
-                if (currentSum < avarageSum + 500)
+                MessageBox.Show(avarageSum.ToString());
+
+                if (currentSum <= avarageSum + 500)
                 {
                     result = true;
                 }
@@ -146,7 +148,9 @@ namespace TestProject
             {
                 int avarageSum = Convert.ToInt32(rows.Rows[0]["AVG"]);
 
-                if (currentSum < avarageSum + 500)
+                MessageBox.Show(avarageSum.ToString());
+
+                if (currentSum <= avarageSum + 500)
                 {
                     result = true;
                 }

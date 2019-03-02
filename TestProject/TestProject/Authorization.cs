@@ -55,6 +55,7 @@ namespace TestProject
                     if (Convert.ToInt32(userInfo.Rows[0]["Ban"]) != 1)
                     {
                         User.name = userInfo.Rows[0]["Name"].ToString();
+                        User.login = userInfo.Rows[0]["Login"].ToString();
 
                         if (Convert.ToInt32(userInfo.Rows[0]["Admin"]) == 0)
                         {
