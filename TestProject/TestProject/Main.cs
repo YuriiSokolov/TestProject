@@ -27,6 +27,9 @@ namespace TestProject
                 btnChangeManager.Visible = true;
             }
 
+            labelWelcome.Text += User.name;
+            labelExit.Location = new System.Drawing.Point(labelWelcome.Location.X + labelWelcome.Size.Width - 2, labelWelcome.Location.Y);
+
             sqlCon.Open();
             string query = "Select * from Document";
             SqlDataAdapter sdaSelectFromDocument = new SqlDataAdapter(query, sqlCon);
@@ -132,6 +135,13 @@ namespace TestProject
         {
             AdminPanel form = new AdminPanel();
             form.Show();
+        }
+
+        private void labelExit_Click(object sender, EventArgs e)
+        {
+            Authorization form = new Authorization();
+            form.Show();
+            Dispose();
         }
     }
 }

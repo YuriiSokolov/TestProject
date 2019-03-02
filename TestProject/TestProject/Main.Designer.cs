@@ -37,6 +37,8 @@
             this.btnResultCancel = new System.Windows.Forms.Button();
             this.btnCreateForm = new System.Windows.Forms.Button();
             this.btnChangeManager = new System.Windows.Forms.Button();
+            this.labelWelcome = new System.Windows.Forms.Label();
+            this.labelExit = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGVFromDocument)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,7 +47,7 @@
             this.dataGVFromDocument.AllowUserToAddRows = false;
             this.dataGVFromDocument.AllowUserToDeleteRows = false;
             this.dataGVFromDocument.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGVFromDocument.Location = new System.Drawing.Point(21, 22);
+            this.dataGVFromDocument.Location = new System.Drawing.Point(12, 46);
             this.dataGVFromDocument.Name = "dataGVFromDocument";
             this.dataGVFromDocument.ReadOnly = true;
             this.dataGVFromDocument.Size = new System.Drawing.Size(567, 235);
@@ -55,7 +57,7 @@
             // 
             this.checkBoxDate.AutoSize = true;
             this.checkBoxDate.Font = new System.Drawing.Font("Impact", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxDate.Location = new System.Drawing.Point(53, 263);
+            this.checkBoxDate.Location = new System.Drawing.Point(44, 287);
             this.checkBoxDate.Name = "checkBoxDate";
             this.checkBoxDate.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkBoxDate.Size = new System.Drawing.Size(55, 21);
@@ -67,7 +69,7 @@
             // 
             this.checkBoxOrganization.AutoSize = true;
             this.checkBoxOrganization.Font = new System.Drawing.Font("Impact", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxOrganization.Location = new System.Drawing.Point(111, 263);
+            this.checkBoxOrganization.Location = new System.Drawing.Point(102, 287);
             this.checkBoxOrganization.Name = "checkBoxOrganization";
             this.checkBoxOrganization.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkBoxOrganization.Size = new System.Drawing.Size(101, 21);
@@ -79,7 +81,7 @@
             // 
             this.checkBoxCity.AutoSize = true;
             this.checkBoxCity.Font = new System.Drawing.Font("Impact", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxCity.Location = new System.Drawing.Point(218, 263);
+            this.checkBoxCity.Location = new System.Drawing.Point(209, 287);
             this.checkBoxCity.Name = "checkBoxCity";
             this.checkBoxCity.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkBoxCity.Size = new System.Drawing.Size(61, 21);
@@ -91,7 +93,7 @@
             // 
             this.checkBoxCountry.AutoSize = true;
             this.checkBoxCountry.Font = new System.Drawing.Font("Impact", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxCountry.Location = new System.Drawing.Point(285, 263);
+            this.checkBoxCountry.Location = new System.Drawing.Point(276, 287);
             this.checkBoxCountry.Name = "checkBoxCountry";
             this.checkBoxCountry.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkBoxCountry.Size = new System.Drawing.Size(68, 21);
@@ -103,7 +105,7 @@
             // 
             this.checkBoxManager.AutoSize = true;
             this.checkBoxManager.Font = new System.Drawing.Font("Impact", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxManager.Location = new System.Drawing.Point(359, 263);
+            this.checkBoxManager.Location = new System.Drawing.Point(350, 287);
             this.checkBoxManager.Name = "checkBoxManager";
             this.checkBoxManager.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkBoxManager.Size = new System.Drawing.Size(89, 21);
@@ -117,7 +119,7 @@
             this.btnResultCancel.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnResultCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnResultCancel.Font = new System.Drawing.Font("Impact", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnResultCancel.Location = new System.Drawing.Point(454, 261);
+            this.btnResultCancel.Location = new System.Drawing.Point(445, 285);
             this.btnResultCancel.Name = "btnResultCancel";
             this.btnResultCancel.Size = new System.Drawing.Size(90, 23);
             this.btnResultCancel.TabIndex = 9;
@@ -131,7 +133,7 @@
             this.btnCreateForm.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnCreateForm.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCreateForm.Font = new System.Drawing.Font("Impact", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnCreateForm.Location = new System.Drawing.Point(53, 290);
+            this.btnCreateForm.Location = new System.Drawing.Point(44, 314);
             this.btnCreateForm.Name = "btnCreateForm";
             this.btnCreateForm.Size = new System.Drawing.Size(116, 23);
             this.btnCreateForm.TabIndex = 10;
@@ -145,7 +147,7 @@
             this.btnChangeManager.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnChangeManager.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnChangeManager.Font = new System.Drawing.Font("Impact", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnChangeManager.Location = new System.Drawing.Point(359, 290);
+            this.btnChangeManager.Location = new System.Drawing.Point(350, 314);
             this.btnChangeManager.Name = "btnChangeManager";
             this.btnChangeManager.Size = new System.Drawing.Size(185, 23);
             this.btnChangeManager.TabIndex = 11;
@@ -153,12 +155,35 @@
             this.btnChangeManager.UseVisualStyleBackColor = false;
             this.btnChangeManager.Click += new System.EventHandler(this.btnChangeManager_Click);
             // 
+            // labelWelcome
+            // 
+            this.labelWelcome.AutoSize = true;
+            this.labelWelcome.Font = new System.Drawing.Font("Impact", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelWelcome.Location = new System.Drawing.Point(12, 9);
+            this.labelWelcome.Name = "labelWelcome";
+            this.labelWelcome.Size = new System.Drawing.Size(89, 17);
+            this.labelWelcome.TabIndex = 14;
+            this.labelWelcome.Text = "Здраствуйте:  ";
+            // 
+            // labelExit
+            // 
+            this.labelExit.AutoSize = true;
+            this.labelExit.Font = new System.Drawing.Font("Impact", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelExit.Location = new System.Drawing.Point(158, 9);
+            this.labelExit.Name = "labelExit";
+            this.labelExit.Size = new System.Drawing.Size(45, 17);
+            this.labelExit.TabIndex = 15;
+            this.labelExit.Text = "Выход";
+            this.labelExit.Click += new System.EventHandler(this.labelExit_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(608, 322);
+            this.ClientSize = new System.Drawing.Size(608, 350);
+            this.Controls.Add(this.labelExit);
+            this.Controls.Add(this.labelWelcome);
             this.Controls.Add(this.btnChangeManager);
             this.Controls.Add(this.btnCreateForm);
             this.Controls.Add(this.btnResultCancel);
@@ -190,5 +215,7 @@
         private System.Windows.Forms.Button btnResultCancel;
         private System.Windows.Forms.Button btnCreateForm;
         private System.Windows.Forms.Button btnChangeManager;
+        private System.Windows.Forms.Label labelWelcome;
+        private System.Windows.Forms.Label labelExit;
     }
 }
