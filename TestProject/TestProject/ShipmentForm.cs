@@ -76,14 +76,14 @@ namespace TestProject
         {
             bool result = false;
 
-            thisMonth = false;
+            thisMonth = true;
 
             DataTable rows = new DataTable();
 
             DateTime date = new DateTime();
             date = DateTime.Now;
 
-            string query = string.Format("Select AVG([Sum]) as 'AVG' From Document Where Manager = '{0}' AND Date = '%{1}%{2}'",
+            string query = string.Format("Select AVG([Sum]) as 'AVG' From Document Where Manager = '{0}' AND Date LIKE '%{1}%{2}'",
                 User.name, date.Month.ToString(), date.Year.ToString());
 
             sqlCon.Open();
@@ -102,7 +102,7 @@ namespace TestProject
 
                 thisMonth = true;
 
-                MessageBox.Show(avarageSum.ToString());
+                //MessageBox.Show(avarageSum.ToString());
 
                 if (currentSum <= avarageSum + 500)
                 {
@@ -148,7 +148,7 @@ namespace TestProject
             {
                 int avarageSum = Convert.ToInt32(rows.Rows[0]["AVG"]);
 
-                MessageBox.Show(avarageSum.ToString());
+                //MessageBox.Show(avarageSum.ToString());
 
                 if (currentSum <= avarageSum + 500)
                 {
